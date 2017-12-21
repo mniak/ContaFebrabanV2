@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Mniak</Authors>
+    <Company>Mniak</Company>
+    <PackageProjectUrl>https://github.com/Mniak/ContaFebrabanV2</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/mniak/ContaFebrabanV2/master/icon.svg</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/Mniak/ContaFebrabanV2/LICENSE.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Mniak/ContaFebrabanV2</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>febraban parser bill</PackageTags>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
