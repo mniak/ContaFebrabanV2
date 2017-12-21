@@ -10,7 +10,6 @@ namespace ContaFebrabanV2
         public List<Recurso> Recursos { get; set; } = new List<Recurso>();
         public T9Trailer Trailer { get; set; }
         public List<T4Servico> Servicos { get; set; } = new List<T4Servico>();
-        public List<T3Bilhete> Bilhetes { get; set; } = new List<T3Bilhete>();
 
         public class Recurso
         {
@@ -47,15 +46,7 @@ namespace ContaFebrabanV2
                         recurso.Enderecos.Add(endereco);
                         break;
                     case T3Bilhete bilhete:
-                        if (string.IsNullOrWhiteSpace(bilhete.Telefone))
-                        {
-                            fatura.Bilhetes.Add(bilhete);
-                        }
-                        else
-                        {
-                            var rec = recursoDictByTelefone[bilhete.DDD + bilhete.Telefone];
-                            rec.Bilhetes.Add(bilhete);
-                        }
+                        recurso.Bilhetes.Add(bilhete);
                         break;
                     case T4Servico servico:
                         if (string.IsNullOrWhiteSpace(servico.Telefone))
