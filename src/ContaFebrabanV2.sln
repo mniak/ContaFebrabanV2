@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContaFebrabanV2", "ContaFebrabanV2\ContaFebrabanV2.csproj", "{A236B874-E14D-42FD-89E6-EAD62B7BB7CB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestaLib", "TestaLib\TestaLib.csproj", "{6AE0A3F8-556D-41F2-BEE4-8416FFDE6490}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A236B874-E14D-42FD-89E6-EAD62B7BB7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A236B874-E14D-42FD-89E6-EAD62B7BB7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A236B874-E14D-42FD-89E6-EAD62B7BB7CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE0A3F8-556D-41F2-BEE4-8416FFDE6490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE0A3F8-556D-41F2-BEE4-8416FFDE6490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE0A3F8-556D-41F2-BEE4-8416FFDE6490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE0A3F8-556D-41F2-BEE4-8416FFDE6490}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
