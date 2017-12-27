@@ -12,7 +12,7 @@ namespace ContaFebrabanV2
 {
     internal class LayoutParser
     {
-        private readonly IFlatFileMultiEngine reader;
+        private readonly FixedLengthFileMultiEngine reader;
 
         public Encoding Encoding { get; set; }
 
@@ -30,7 +30,7 @@ namespace ContaFebrabanV2
               new T5DescontoLayout(),
               new T9TrailerLayout(),
             };
-            this.reader = factory.GetEngine(layouts, ChooseLayout);
+            this.reader = (FixedLengthFileMultiEngine)factory.GetEngine(layouts, ChooseLayout); // while Read(StreamWriter) is not exposed in the interface
         }
 
         private Type ChooseLayout(string line, int lineNumber)
@@ -54,7 +54,7 @@ namespace ContaFebrabanV2
             sr = new StreamReader(stream, this.Encoding);
             using (sr)
             {
-                reader.Read(sr);
+                reader.Read(sr); // Try t
                 var records = new List<BaseRecord>();
                 records.AddRange(reader.GetRecords<T0Header>());
                 records.AddRange(reader.GetRecords<T1Resumo>());
