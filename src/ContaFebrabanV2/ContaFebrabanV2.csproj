@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FlatFile\src\FlatFile.FixedLength\FlatFile.FixedLength.csproj" />
+    <PackageReference Include="FlatFile.FixedLength" Version="0.2.51" />
   </ItemGroup>
 
 </Project>
