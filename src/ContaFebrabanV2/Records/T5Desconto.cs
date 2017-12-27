@@ -3,7 +3,7 @@ using System;
 
 namespace ContaFebrabanV2.Records
 {
-    public class T5Desconto : BaseRecord
+    public class T5Desconto : BaseRecord, IRecordDetalhe, IRecordDetalheAgrupado
     {
         public DateTime DataVencimento { get; set; }
         public DateTime DataEmissao { get; set; }
@@ -12,14 +12,26 @@ namespace ContaFebrabanV2.Records
         public int CnlRecurso { get; set; }
         public string DDD { get; set; }
         public string Telefone { get; set; }
-        public string GrupoCategoria { get; set; }
-        public string DescricaoGrupoCategoria { get; set; }
-        public SinalEnum SinalValorLigacao { get; set; }
+        public string CodGrupo { get; set; }
+        public string Grupo { get; set; }
         public decimal BaseCalculoDesconto { get; set; }
         public decimal PercentualDesconto { get; set; }
-        public decimal ValorLigacao { get; set; }
         public DateTimePeriod PeriodoAcerto { get; set; }
         public int ClasseServico { get; set; }
-        public string Filler { get; set; }
+
+        internal SinalEnum _sinalValorLigacao { get; set; } = SinalEnum.Positivo;
+        internal decimal _valorAbsolutoLigacao { get; set; }
+        public ValorComSinal ValorLigacao
+        {
+            get
+            {
+                return new ValorComSinal(_sinalValorLigacao, _valorAbsolutoLigacao);
+            }
+            set
+            {
+                this._sinalValorLigacao = value.Sinal;
+                this._valorAbsolutoLigacao = value.Valor;
+            }
+        }
     }
 }

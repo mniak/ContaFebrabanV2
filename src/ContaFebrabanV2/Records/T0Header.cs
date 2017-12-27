@@ -13,6 +13,5 @@ namespace ContaFebrabanV2.Records
         public string IdConta { get; internal set; }
         public DateTime DataVencimento { get; internal set; }
         public DateTime DataEmissao { get; set; }
-        public string Filler { get; set; }
     }
 }

@@ -22,7 +22,5 @@
         public string B_EnderecoNro { get; set; }
         public string B_EnderecoComplemento { get; set; }
         public string B_EnderecoBairro { get; set; }
-
-        public string Filler { get; set; }
     }
 }

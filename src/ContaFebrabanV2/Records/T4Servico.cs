@@ -3,7 +3,7 @@ using System;
 
 namespace ContaFebrabanV2.Records
 {
-    public class T4Servico : BaseRecord
+    public class T4Servico : BaseRecord, IRecordDetalheCategorizado, IRecordDetalheAgrupado
     {
         public DateTime DataVencimento { get; set; }
         public DateTime DataEmissao { get; set; }
@@ -21,16 +21,15 @@ namespace ContaFebrabanV2.Records
         public string DescricaoOperadora { get; set; }
         public string CodigoPaisChamado { get; set; }
         public string CodigoDeArea { get; set; }
-        public string NumeroTelefoneChamado { get; set; }
+        public string TelefoneChamado { get; set; }
         public string ConjugadoTelefoneChamado { get; set; }
         public TimeSpan? DuracaoLigacao { get; set; }
         public TimeSpan? HorarioLigacao { get; set; }
+        public string CodGrupo { get; set; }
         public string Grupo { get; set; }
-        public string DescricaoGrupo { get; set; }
+        public string CodCategoria { get; set; }
         public string Categoria { get; set; }
-        public string DescricaoCategoria { get; set; }
         public ValorComSinal ValorLigacao { get; set; }
         public int ClasseServico { get; set; }
-        public string Filler { get; set; }
     }
 }

@@ -12,6 +12,5 @@ namespace ContaFebrabanV2.Records
         public int QuantidadeRegistros { get; set; }
         public int QuantidadeRecursos { get; set; }
         public ValorComSinal ValorTotal { get; set; }
-        public string Filler { get; set; }
     }
 }

@@ -36,6 +36,5 @@ namespace ContaFebrabanV2.Records
         public ValorComSinal ValorOutrosImpostos { get; set; }
         public string NroNotaFiscal { get; set; }
         public ValorComSinal ValorConta { get; set; }
-        public string Filler { get; set; }
     }
 }

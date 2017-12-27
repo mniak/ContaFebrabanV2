@@ -1,6 +1,8 @@
 ﻿using ContaFebrabanV2.Records;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace ContaFebrabanV2
 {
@@ -23,9 +25,8 @@ namespace ContaFebrabanV2
         public static Fatura Parse(Stream stream)
         {
             Fatura fatura = new Fatura();
-            Recurso recurso = null;
 
-            var recursoDictByTelefone = new Dictionary<string, Recurso>();
+            var recursoDictByTelefone = new Dictionary<(string, string), Recurso>();
 
             var parse = new LayoutParser();
             var records = parse.Parse(stream);
@@ -37,15 +38,27 @@ namespace ContaFebrabanV2
                         fatura.Header = header;
                         break;
                     case T1Resumo resumo:
-                        recurso = new Recurso();
+                        var recurso = new Recurso();
                         recurso.Resumo = resumo;
                         fatura.Recursos.Add(recurso);
-                        recursoDictByTelefone[recurso.Resumo.DDD + recurso.Resumo.Telefone] = recurso;
+                        recursoDictByTelefone[(recurso.Resumo.DDD, recurso.Resumo.Telefone)] = recurso;
                         break;
+                    case T9Trailer trailer:
+                        fatura.Trailer = trailer;
+                        break;
+                }
+            }
+            foreach (var record in records)
+            {
+                Recurso recurso;
+                switch (record)
+                {
                     case T2Endereco endereco:
+                        recurso = recursoDictByTelefone[(endereco.DDD, endereco.Telefone)];
                         recurso.Enderecos.Add(endereco);
                         break;
                     case T3Bilhete bilhete:
+                        recurso = recursoDictByTelefone[(bilhete.DDD, bilhete.Telefone)];
                         recurso.Bilhetes.Add(bilhete);
                         break;
                     case T4Servico servico:
@@ -55,15 +68,13 @@ namespace ContaFebrabanV2
                         }
                         else
                         {
-                            var rec = recursoDictByTelefone[servico.DDD + servico.Telefone];
-                            rec.Servicos.Add(servico);
+                            recurso = recursoDictByTelefone[(servico.DDD, servico.Telefone)];
+                            recurso.Servicos.Add(servico);
                         }
                         break;
                     case T5Desconto desconto:
+                        recurso = recursoDictByTelefone[(desconto.DDD, desconto.Telefone)];
                         recurso.Descontos.Add(desconto);
-                        break;
-                    case T9Trailer trailer:
-                        fatura.Trailer = trailer;
                         break;
                 }
             }
