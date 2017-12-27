@@ -22,14 +22,16 @@ namespace ContaFebrabanV2
             public List<T5Desconto> Descontos { get; set; } = new List<T5Desconto>();
         }
 
-        public static Fatura Parse(Stream stream)
+        public static Fatura Parse(Stream stream, Encoding encoding = null)
         {
             Fatura fatura = new Fatura();
 
             var recursoDictByTelefone = new Dictionary<(string, string), Recurso>();
 
-            var parse = new LayoutParser();
-            var records = parse.Parse(stream);
+            var parser = new LayoutParser();
+            if (encoding != null)
+                parser.Encoding = encoding;
+            var records = parser.Parse(stream);
             foreach (var record in records)
             {
                 switch (record)

@@ -6,14 +6,20 @@ using ContaFebrabanV2.Records;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace ContaFebrabanV2
 {
     internal class LayoutParser
     {
         private readonly IFlatFileMultiEngine reader;
+
+        public Encoding Encoding { get; set; }
+
         public LayoutParser()
         {
+            this.Encoding = Encoding.Default;
+
             var factory = new FixedLengthFileEngineFactory();
             var layouts = new ILayoutDescriptor<IFixedFieldSettingsContainer>[] {
               new T0HeaderLayout(),
@@ -42,19 +48,23 @@ namespace ContaFebrabanV2
                 default: return null;
             }
         }
-
         public IEnumerable<BaseRecord> Parse(Stream stream)
         {
-            reader.Read(stream);
-            var records = new List<BaseRecord>();
-            records.AddRange(reader.GetRecords<T0Header>());
-            records.AddRange(reader.GetRecords<T1Resumo>());
-            records.AddRange(reader.GetRecords<T2Endereco>());
-            records.AddRange(reader.GetRecords<T3Bilhete>());
-            records.AddRange(reader.GetRecords<T4Servico>());
-            records.AddRange(reader.GetRecords<T5Desconto>());
-            records.AddRange(reader.GetRecords<T9Trailer>());
-            return records;
+            StreamReader sr;
+            sr = new StreamReader(stream, this.Encoding);
+            using (sr)
+            {
+                reader.Read(sr);
+                var records = new List<BaseRecord>();
+                records.AddRange(reader.GetRecords<T0Header>());
+                records.AddRange(reader.GetRecords<T1Resumo>());
+                records.AddRange(reader.GetRecords<T2Endereco>());
+                records.AddRange(reader.GetRecords<T3Bilhete>());
+                records.AddRange(reader.GetRecords<T4Servico>());
+                records.AddRange(reader.GetRecords<T5Desconto>());
+                records.AddRange(reader.GetRecords<T9Trailer>());
+                return records;
+            }
         }
     }
 }
